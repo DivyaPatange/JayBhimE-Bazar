@@ -16,7 +16,7 @@
                 </div>
             </div>
             <a href="index.html">
-                <img class="img-fluid" src="../files/assets/images/logo.png" alt="Theme-Logo" />
+                <img class="img-fluid" src="{{ asset('jaibhimebazarLogo.png') }}" alt="Theme-Logo" width="100px" />
             </a>
             <a class="mobile-options waves-effect waves-light">
                 <i class="ti-more"></i>
@@ -43,7 +43,7 @@
                 </li>
             </ul>
             <ul class="nav-right">
-                <li class="header-notification">
+                <!-- <li class="header-notification">
                     <a href="#!" class="waves-effect waves-light">
                         <i class="ti-bell"></i>
                         <span class="badge bg-c-red"></span>
@@ -84,17 +84,17 @@
                             </div>
                         </li>
                     </ul>
-                </li>
-                <li class="">
+                </li> -->
+                <!-- <li class="">
                     <a href="#!" class="displayChatbox waves-effect waves-light">
                         <i class="ti-comments"></i>
                         <span class="badge bg-c-green"></span>
                     </a>
-                </li>
+                </li> -->
                 <li class="user-profile header-notification">
                     <a href="#!" class="waves-effect waves-light">
-                        <img src="../files/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                        <span>John Doe</span>
+                        <!-- <img src="../files/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
+                        <span>{{ Auth::user()->name }}</span>
                         <i class="ti-angle-down"></i>
                     </a>
                     <ul class="show-notification profile-notification">
@@ -108,7 +108,7 @@
                                 <i class="ti-user"></i> Profile
                             </a>
                         </li>
-                        <li class="waves-effect waves-light">
+                        <!-- <li class="waves-effect waves-light">
                             <a href="email-inbox.html">
                                 <i class="ti-email"></i> My Messages
                             </a>
@@ -117,9 +117,9 @@
                             <a href="auth-lock-screen.html">
                                 <i class="ti-lock"></i> Lock Screen
                             </a>
-                        </li>
+                        </li> -->
                         <li class="waves-effect waves-light">
-                            <a href="auth-normal-sign-in.html">
+                            <a href="{{ route('admin.logout') }}">
                                 <i class="ti-layout-sidebar-left"></i> Logout
                             </a>
                         </li>

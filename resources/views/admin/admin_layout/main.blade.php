@@ -12,6 +12,7 @@
     <!-- Favicon icon -->
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
     @include('admin.admin_layout.stylesheets')
+    @yield('customcss')
 </head>
 
 <body>
@@ -81,8 +82,8 @@
                         <div class="user-box">
                             <div class="chat-search-box">
                                 <a class="back_friendlist">
-                      <i class="fa fa-chevron-left"></i>
-                    </a>
+                                    <i class="fa fa-chevron-left"></i>
+                                </a>
                                 <div class="right-icon-control">
                                     <form class="form-material">
                                         <div class="form-group form-primary">
@@ -96,45 +97,45 @@
                             <div class="main-friend-list">
                                 <div class="media userlist-box waves-effect waves-light" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
                                     <a class="media-left" href="#!">
-                        <img class="media-object img-radius img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image ">
-                        <div class="live-status bg-success"></div>
-                      </a>
+                                        <img class="media-object img-radius img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image ">
+                                        <div class="live-status bg-success"></div>
+                                    </a>
                                     <div class="media-body">
                                         <div class="f-13 chat-header">Josephin Doe</div>
                                     </div>
                                 </div>
                                 <div class="media userlist-box waves-effect waves-light" data-id="2" data-status="online" data-username="Lary Doe" data-toggle="tooltip" data-placement="left" title="Lary Doe">
                                     <a class="media-left" href="#!">
-                        <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                        <div class="live-status bg-success"></div>
-                      </a>
+                                        <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                        <div class="live-status bg-success"></div>
+                                    </a>
                                     <div class="media-body">
                                         <div class="f-13 chat-header">Lary Doe</div>
                                     </div>
                                 </div>
                                 <div class="media userlist-box waves-effect waves-light" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
                                     <a class="media-left" href="#!">
-                        <img class="media-object img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                        <div class="live-status bg-success"></div>
-                      </a>
+                                        <img class="media-object img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                                        <div class="live-status bg-success"></div>
+                                    </a>
                                     <div class="media-body">
                                         <div class="f-13 chat-header">Alice</div>
                                     </div>
                                 </div>
                                 <div class="media userlist-box waves-effect waves-light" data-id="4" data-status="online" data-username="Alia" data-toggle="tooltip" data-placement="left" title="Alia">
                                     <a class="media-left" href="#!">
-                        <img class="media-object img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image">
-                        <div class="live-status bg-success"></div>
-                      </a>
+                                        <img class="media-object img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image">
+                                        <div class="live-status bg-success"></div>
+                                    </a>
                                     <div class="media-body">
                                         <div class="f-13 chat-header">Alia</div>
                                     </div>
                                 </div>
                                 <div class="media userlist-box waves-effect waves-light" data-id="5" data-status="online" data-username="Suzen" data-toggle="tooltip" data-placement="left" title="Suzen">
                                     <a class="media-left" href="#!">
-                        <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
-                        <div class="live-status bg-success"></div>
-                      </a>
+                                        <img class="media-object img-radius" src="../files/assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                        <div class="live-status bg-success"></div>
+                                    </a>
                                     <div class="media-body">
                                         <div class="f-13 chat-header">Suzen</div>
                                     </div>
@@ -153,8 +154,8 @@
                 </div>
                 <div class="media chat-messages">
                     <a class="media-left photo-table" href="#!">
-                <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image">
-              </a>
+                        <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image">
+                    </a>
                     <div class="media-body chat-menu-content">
                         <div class="">
                             <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
@@ -171,8 +172,8 @@
                     </div>
                     <div class="media-right photo-table">
                         <a href="#!">
-                  <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder image">
-                </a>
+                            <img class="media-object img-radius img-radius m-t-5" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                        </a>
                     </div>
                 </div>
                 <div class="chat-reply-box">
@@ -186,8 +187,8 @@
                         </form>
                         <div class="form-icon ">
                             <button class="btn btn-success btn-icon  waves-effect waves-light">
-                    <i class="fa fa-paper-plane "></i>
-                  </button>
+                                <i class="fa fa-paper-plane "></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -203,8 +204,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10">Dashboard</h5>
-                                            <p class="m-b-0">Welcome to Mega Able</p>
+                                            <h5 class="m-b-10">@yield('page_title')</h5>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -212,7 +212,7 @@
                                             <li class="breadcrumb-item">
                                                 <a href="index.html"> <i class="fa fa-home"></i> </a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Dashboard</a>
+                                            <li class="breadcrumb-item"><a href="#!">@yield('breadcrumb')</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -241,6 +241,7 @@
    
     <!-- Required Jquery -->
     @include('admin.admin_layout.scripts')
+    @yield('customjs')
 </body>
 
 </html>

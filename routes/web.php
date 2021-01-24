@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +17,32 @@ use App\Http\Controllers\Auth\AdminController;
 |
 */
 
+
+
 Route::get('/', function () {
-    return view('admin.dashboard');
+    return view('auth.index');
 });
+Route::get('/blog', function () {
+    return view('auth.blog');
+});
+Route::get('/shop', function () {
+    return view('auth.shop');
+});
+Route::get('/contact', function () {
+    return view('auth.contact');
+});
+Route::get('/cart', function () {
+    return view('auth.cart');
+});
+Route::get('/checkout', function () {
+    return view('auth.checkout');
+});
+Route::get('/product_detail', function () {
+    return view('auth.product_detail');
+});
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
 Auth::routes();
 
@@ -29,4 +54,6 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::post('/login', [AdminLoginController::class, 'login'])->name('login.submit');
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/logout', [AdminLoginController::class, 'logout'])->name('logout');
+    Route::resource('/categories', CategoryController::class);
+    Route::resource('/sub-categories', SubCategoryController::class);
 });

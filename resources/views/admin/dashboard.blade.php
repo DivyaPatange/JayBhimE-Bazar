@@ -1,5 +1,7 @@
 @extends('admin.admin_layout.main')
 @section('title', 'Dashboard')
+@section('page_title', 'Dashboard')
+@section('breadcrumb', 'Dashboard')
 @section('customcss')
 
 
