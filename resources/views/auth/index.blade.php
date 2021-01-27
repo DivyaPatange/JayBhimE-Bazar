@@ -71,6 +71,26 @@
 	
 	<section>
 		<div class="container">
+			<div class="row mb-3">
+				<div class="col-md-12">
+				@if(session()->has('success_msg'))
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<p>{{ session()->get('success_msg') }}</p>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+				@endif
+				@if(session()->has('alert_msg'))
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						{{ session()->get('alert_msg') }}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+				@endif
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="left-sidebar">
@@ -242,16 +262,35 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 										<div class="productinfo text-center">
-											<img src="{{  URL::asset('ProductImg/' . $p->product_img) }}" alt="" class="img-fluid" />
+										<?php
+											$explodeProductImage = explode(",", $p->product_img);
+										?>
+											<img src="{{  URL::asset('ProductImg/' . $explodeProductImage[0]) }}" alt="" class="img-fluid" />
 											<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
 											<p>{{ $p->product_name }}</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											<form action="{{ route('cart.store') }}" method="POST">
+												{{ csrf_field() }}
+												<input type="hidden" value="{{ $p->id }}" id="id" name="id">
+												<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
+												<input type="hidden" value="{{ $p->selling_price }}" id="price" name="price">
+												<input type="hidden" value="{{ $explodeProductImage[0] }}" id="img" name="img">
+												<input type="hidden" value="1" id="quantity" name="quantity">
+												<button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+											</form>
 										</div>
 										<div class="product-overlay">
 											<div class="overlay-content">
 												<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
 												<p>{{ $p->product_name }}</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												<form action="{{ route('cart.store') }}" method="POST">
+													{{ csrf_field() }}
+													<input type="hidden" value="{{ $p->id }}" id="id" name="id">
+													<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
+													<input type="hidden" value="{{ $p->selling_price }}" id="price" name="price">
+													<input type="hidden" value="{{ $explodeProductImage[0] }}" id="img" name="img">
+                                        			<input type="hidden" value="1" id="quantity" name="quantity">
+													<button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+												</form>
 											</div>
 										</div>
 								</div>

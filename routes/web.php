@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\DesignController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,9 +35,6 @@ Route::get('/shop', function () {
 Route::get('/contact', function () {
     return view('auth.contact');
 });
-Route::get('/cart', function () {
-    return view('auth.cart');
-});
 Route::get('/checkout', function () {
     return view('auth.checkout');
 });
@@ -49,7 +47,9 @@ Route::get('/login', function () {
 
 Route::get('/single-product/{id}', [DesignController::class, 'singleProduct'])->name('single.product');
 Route::get('/single-products/{id}', [DesignController::class, 'singleCategoryProduct'])->name('single.category.product');
-
+Route::get('/cart', [CartController::class, 'cart'])->name('cart.index');
+Route::post('/add', [CartController::class, 'add'])->name('cart.store');
+Route::post('/update', [CartController::class, 'update'])->name('cart.update');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

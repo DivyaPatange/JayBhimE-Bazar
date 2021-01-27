@@ -18,7 +18,7 @@
 					<thead>
 						<tr class="cart_menu">
 							<td class="image">Item</td>
-							<td class="description"></td>
+							<td class="description">Product Name</td>
 							<td class="price">Price</td>
 							<td class="quantity">Quantity</td>
 							<td class="total">Total</td>
@@ -26,32 +26,30 @@
 						</tr>
 					</thead>
 					<tbody>
+						@foreach($cartCollection as $item)
 						<tr>
 							<td class="cart_product">
-								<a href=""><img src="images/cart/one.png" alt=""></a>
+								<a href=""><img src="/productImg/{{ $item->attributes->image }}" alt="" width="25%"></a>
 							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
+							<td class="description">{{ $item->name }}</td>
 							<td class="cart_price">
-								<p>$59</p>
+								<p><i class="fa fa-inr">&nbsp;</i>{{ $item->price }}</p>
 							</td>
+							<form action="{{ route('cart.update') }}" method="POST">
+                                {{ csrf_field() }}
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
+									<input type="hidden" value="{{ $item->id}}" id="id" name="id">
+									<input class="cart_quantity_input" type="number" name="quantity" value="{{ $item->quantity }}" id="quantity" name="quantity" size="2">
+									<button class="btn btn-secondary btn-sm" style="margin-right: 25px;"><i class="fa fa-edit"></i></button>
 								</div>
 							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
+							</form>
 							<td class="cart_delete">
 								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
-
+						@endforeach
 						<tr>
 							<td class="cart_product">
 								<a href=""><img src="images/cart/two.png" alt=""></a>

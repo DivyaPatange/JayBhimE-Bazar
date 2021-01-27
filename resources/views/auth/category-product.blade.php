@@ -171,17 +171,36 @@
 						<div class="col-sm-3">
 							<div class="product-image-wrapper">
 								<div class="single-products">
+								<?php
+									$explodeImage = explode(",", $p->product_img);
+								?>
 										<div class="productinfo text-center">
-											<img src="{{  URL::asset('ProductImg/' . $p->product_img) }}" alt="" class="img-fluid" />
+											<img src="{{  URL::asset('ProductImg/' . $explodeImage[0]) }}" alt="" class="img-fluid" />
 											<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
 											<p>{{ $p->product_name }}</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											<form action="{{ route('cart.store') }}" method="POST">
+												{{ csrf_field() }}
+												<input type="hidden" value="{{ $p->id }}" id="id" name="id">
+												<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
+												<input type="hidden" value="{{ $p->selling_price }}" id="price" name="price">
+												<input type="hidden" value="{{ $explodeImage[0] }}" id="img" name="img">
+												<input type="hidden" value="1" id="quantity" name="quantity">
+												<button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+											</form>
 										</div>
 										<div class="product-overlay">
 											<div class="overlay-content">
 												<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
 												<p>{{ $p->product_name }}</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												<form action="{{ route('cart.store') }}" method="POST">
+												{{ csrf_field() }}
+												<input type="hidden" value="{{ $p->id }}" id="id" name="id">
+												<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
+												<input type="hidden" value="{{ $p->selling_price }}" id="price" name="price">
+												<input type="hidden" value="{{ $explodeImage[0] }}" id="img" name="img">
+												<input type="hidden" value="1" id="quantity" name="quantity">
+												<button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+												</form>
 											</div>
 										</div>
 								</div>
