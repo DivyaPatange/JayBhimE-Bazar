@@ -13,7 +13,7 @@
 <!-- scrollbar.css -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.mCustomScrollbar.css') }}">
 <!-- am chart export.css -->
-<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <!-- radial chart.css -->
 <link rel="stylesheet" href="{{ asset('assets/pages/chart/radial/css/radial.css') }}" type="text/css" media="all">
 <!-- Style.css -->

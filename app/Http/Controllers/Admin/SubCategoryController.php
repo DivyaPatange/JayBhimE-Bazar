@@ -21,8 +21,9 @@ class SubCategoryController extends Controller
     public function index()
     {
         $categories = Category::where('status', 1)->get();
-        $subCategories = SubCategory::all();
-        return view('admin.subCategory.index', compact('categories', 'subCategories'));
+        $subCategories = SubCategory::orderBy('id', 'DESC')->get();
+        $parentSubCategory = SubCategory::where('status', 1)->get();
+        return view('admin.subCategory.index', compact('categories', 'subCategories', 'parentSubCategory'));
     }
 
     /**
@@ -84,7 +85,8 @@ class SubCategoryController extends Controller
     {
         $categories = Category::where('status', 1)->get();
         $subCategory = SubCategory::findorfail($id);
-        return view('admin.subCategory.edit', compact('categories', 'subCategory'));
+        $parentSubCategory = SubCategory::where('status', 1)->get();
+        return view('admin.subCategory.edit', compact('categories', 'subCategory', 'parentSubCategory'));
     }
 
     /**
@@ -102,18 +104,17 @@ class SubCategoryController extends Controller
             'category_name' => 'required',
             'status' => 'required',
         ]);
-        $subCategory = new SubCategory();
         $subCategory->category_id = $request->category_name;
         $subCategory->sub_category = $request->sub_category;
         if($request->parent_status == "No")
         {
             $subCategory->parent_id = $request->parent_sub_category;
         }
-        else{
+        elseif($request->parent_status == "Yes"){
             $subCategory->parent_id = 0;
         }
         $subCategory->status = $request->status;
-        $subCategory->save();
+        $subCategory->update($request->all());
         return redirect('/admin/sub-categories')->with('success', 'Sub Category Updated Successfully!');
     }
 

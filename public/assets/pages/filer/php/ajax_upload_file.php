@@ -2,7 +2,7 @@
     include('../../../php/class.uploader.php');
 
     $uploader = new Uploader();
-    $data = $uploader->upload($_FILES['files'], array(
+    $data = $uploader->upload($_FILES['product_img'], array(
         'limit' => 10, //Maximum Limit of files. {null, Number}
         'maxSize' => 10, //Maximum Size of files {null, Number(in MB's)}
         'extensions' => null, //Whitelist for file extension. {null, Array(ex: array('jpg', 'png'))}

@@ -5,6 +5,9 @@ use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\DesignController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +47,9 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
+Route::get('/single-product/{id}', [DesignController::class, 'singleProduct'])->name('single.product');
+Route::get('/single-products/{id}', [DesignController::class, 'singleCategoryProduct'])->name('single.category.product');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -56,4 +62,10 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/logout', [AdminLoginController::class, 'logout'])->name('logout');
     Route::resource('/categories', CategoryController::class);
     Route::resource('/sub-categories', SubCategoryController::class);
+    Route::resource('/brand', BrandController::class);
+    Route::get('get-brandSubCategory-list', [BrandController::class, 'brandSubCategory']);
+    Route::get('get-childSubCategory-list', [BrandController::class, 'childSubCategory']);
+    Route::resource('/product', ProductController::class);
+    Route::get('get-subcategory-list', [ProductController::class, 'getSubCategoryList']);
+    Route::get('get-parentSubCategory-list', [ProductController::class, 'parentSubCategory']);
 });

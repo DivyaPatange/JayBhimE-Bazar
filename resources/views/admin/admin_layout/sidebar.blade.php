@@ -49,55 +49,13 @@
                                     <span class="pcoded-mcaret"></span>
                                   </a>
                                 </li>
-                                <!-- <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                        <span class="pcoded-micon"><i class="ti-view-grid"></i><b>W</b></span>
-                        <span class="pcoded-mtext">Widget</span>
-                        <span class="pcoded-badge label label-danger">100+</span>
-                        <span class="pcoded-mcaret"></span>
-                      </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class="">
-                                            <a href="widget-statistic.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext">Statistic</span>
-                            <span class="pcoded-mcaret"></span>
-                          </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="widget-data.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext">Data</span>
-                            <span class="pcoded-mcaret"></span>
-                          </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="widget-chart.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext">Chart Widget</span>
-                            <span class="pcoded-mcaret"></span>
-                          </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="widget-chart-advance.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext">Advance Widgets</span>
-                            <span class="pcoded-badge label label-info">25+</span>
-                            <span class="pcoded-mcaret"></span>
-                          </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <div class="pcoded-navigation-label">UI Element</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                <li class="">
+                                    <a href="{{ route('admin.brand.index') }}" class="waves-effect waves-dark">
                         <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>BC</b></span>
-                        <span class="pcoded-mtext">Basic</span>
+                        <span class="pcoded-mtext">Brand</span>
                         <span class="pcoded-mcaret"></span>
                       </a>
-                                    <ul class="pcoded-submenu">
+                                   <!--  <ul class="pcoded-submenu">
                                         <li class=" ">
                                             <a href="alert.html" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -204,9 +162,51 @@
                           </a>
                                         </li>
 
-                                    </ul>
+                                    </ul> -->
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                 <li class="">
+                                    <a href="{{ route('admin.product.index') }}" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-view-grid"></i><b>W</b></span>
+                                      <span class="pcoded-mtext">Product</span>
+                                      <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <!-- <ul class="pcoded-submenu">
+                                        <li class="">
+                                            <a href="widget-statistic.html" class="waves-effect waves-dark">
+                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                              <span class="pcoded-mtext">Statistic</span>
+                                              <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="widget-data.html" class="waves-effect waves-dark">
+                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                              <span class="pcoded-mtext">Data</span>
+                                              <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="widget-chart.html" class="waves-effect waves-dark">
+                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                              <span class="pcoded-mtext">Chart Widget</span>
+                                              <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="widget-chart-advance.html" class="waves-effect waves-dark">
+                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                              <span class="pcoded-mtext">Advance Widgets</span>
+                                              <span class="pcoded-badge label label-info">25+</span>
+                                              <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                     </ul> -->
+                                </li>
+                            </ul>
+                            <!-- <div class="pcoded-navigation-label">UI Element</div>  -->
+                            <ul class="pcoded-item pcoded-left-item">
+                                
+                                <!-- <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                         <span class="pcoded-micon"><i class="ti-crown"></i><b>AC</b></span>
                         <span class="pcoded-mtext">Advance</span>

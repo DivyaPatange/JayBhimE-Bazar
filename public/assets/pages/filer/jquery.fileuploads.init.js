@@ -98,7 +98,7 @@ $(document).ready(function(){
             drop: null,
         },
         uploadFile: {
-            url: "../files/assets/pages/filer/php/ajax_upload_file.php",
+            url: "{{ asset('assets/pages/filer/php/ajax_upload_file.php') }}",
             data: null,
             type: 'POST',
             enctype: 'multipart/form-data',

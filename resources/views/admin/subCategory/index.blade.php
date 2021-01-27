@@ -8,6 +8,17 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/data-table/css/buttons.dataTables.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+$(function(){
+$('#Yes').click(function() {
+    $("#parent_sub_category").attr('disabled', true);
+})
+$('#No').click(function() {
+    $("#parent_sub_category").removeAttr('disabled', false);
+})
+});
+</script>
 @endsection
 @section('content')
 <div class="row">
@@ -66,7 +77,43 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="form-group form-default ">
+                                <label class="">Parent</label>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" id="Yes" class="form-check-input @error('parent_status') is-invalid @enderror" name="parent_status" value="Yes" Checked>Yes
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" id="No" class="form-check-input @error('parent_status') is-invalid @enderror" name="parent_status" value="No" @if(old('parent_status') == "No") Checked @endif>No
+                                    </label>
+                                </div>        
+                                @error('parent_status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group form-default ">
+                                <select name="parent_sub_category" id="parent_sub_category" class="form-control @error('parent_sub_category') is-invalid @enderror" disabled>
+                                    @foreach($parentSubCategory as $ps)
+                                    <option value="{{ $ps->id }}">{{ $ps->sub_category }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="form-bar"></span>
+                                <label class="float-label">Sub-Category</label>
+                                @error('sub_category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group form-default">
                                 <select name="status" class="form-control @error('status') is-invalid @enderror">
                                     <option value="">-Select Status-</option>
@@ -121,7 +168,7 @@
                                 ?>
                                 <td>@if(isset($category) && !empty($category)) {{ $category->category_name }} @endif</td>
                                 <td>{{ $s->sub_category }}</td>
-                                <td>@if(isset($parentSubCategory) && !empty($parentSubCategory)) {{ $parentSubCategory->sub_category }} @endif</td>
+                                <td>@if(isset($parentSubCategory) && !empty($parentSubCategory)) {{ $parentSubCategory->sub_category }} @else - @endif</td>
                                 <td>@if($s->status == 1) Active @else Inactive @endif</td>
                                 <td>
                                     <a href="{{ route('admin.sub-categories.edit', $s->id) }}"><button class="btn btn-primary waves-effect waves-light">Edit</button></a>
@@ -163,11 +210,16 @@
 <script src="{{ asset('bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('bower_components/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+
 <script>
 $(document).ready(function(){
     $('#dom-jqry').DataTable({
 	});
+
+    
 });
+
+
 </script>
 @endsection
 @endsection
