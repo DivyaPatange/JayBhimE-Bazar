@@ -74,19 +74,15 @@
 			<div class="row mb-3">
 				<div class="col-md-12">
 				@if(session()->has('success_msg'))
-					<div class="alert alert-success alert-dismissible fade show" role="alert">
-						<p>{{ session()->get('success_msg') }}</p>
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
+				<div class="alert alert-success alert-dismissible">
+  					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					{{ session()->get('success_msg') }}
+				</div>
 				@endif
 				@if(session()->has('alert_msg'))
-					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					<div class="alert alert-warning alert-dismissible">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 						{{ session()->get('alert_msg') }}
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
 					</div>
 				@endif
 				</div>
@@ -222,19 +218,20 @@
 							<h2>Brands</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
+								<marquee scrollamount="2" width="100%" direction="down" height="250px" onmouseover="this.stop();"
+           onmouseout="this.start();">
 								<?php
-									// $brand = DB::table('brands')->where('status', 1)->get();
+									$brand = DB::table('brands')->where('status', 1)->orderBy('id', 'DESC')->get();
 								?>
-									<li><a href="#"> <span class="pull-right">(56)</span>Grüne Erde</a></li>
-									<li><a href="#"> <span class="pull-right">(27)</span>Albiro</a></li>
-									<li><a href="#"> <span class="pull-right">(32)</span>Ronhill</a></li>
-									<li><a href="#"> <span class="pull-right">(5)</span>Oddmolly</a></li>
-									<li><a href="#"> <span class="pull-right">(9)</span>Boudestijn</a></li>
-									<li><a href="#"> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
+									@foreach($brand as $b)
+									<li style="padding: 10px 0px; border-bottom: 1px solid #f0f0f0;"><a href="{{ route('getProductByBrand', $b->id) }}"> {{ $b->brand_name }}</a></li>
+									@endforeach		
+								</marquee>
 								</ul>
 							</div>
 						</div><!--/brands_products-->
-						
+
+			
 						<div class="price-range"><!--price-range-->
 							<h2>Price Range</h2>
 							<div class="well text-center">

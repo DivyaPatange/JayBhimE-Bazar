@@ -26,4 +26,24 @@ class CartController extends Controller
         $cartCollection = \Cart::getContent();
         return view('auth.cart', compact('cartCollection'));
     }
+
+    public function remove(Request $request){
+        \Cart::remove($request->id);
+        return redirect()->route('cart.index')->with('success_msg', 'Item is removed!');
+    }
+
+    public function update(Request $request){
+        \Cart::update($request->id,
+            array(
+                'quantity' => array(
+                    'relative' => false,
+                    'value' => $request->quantity
+                ),
+        ));
+        return redirect()->route('cart.index')->with('success_msg', 'Cart is Updated!');
+    }
+    public function clear(){
+        \Cart::clear();
+        return redirect()->route('cart.index')->with('success_msg', 'Car is cleared!');
+    }
 }

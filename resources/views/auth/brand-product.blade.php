@@ -168,61 +168,7 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Features Items</h2>
-						<?php
-							if($subCategory->status == 1){
-								// dd($subCategory);
-								$subCategories = DB::table('sub_categories')->where('parent_id', $subCategory->id)->where('status', 1)->get();
-							}
-							// dd($subCategories);
-						?>
-						@if(count($subCategories) > 0)
-						<div class="category-tab"><!--category-tab-->
-							<div class="col-sm-12">
-								<ul class="nav nav-tabs">
-									
-									@foreach($subCategories as $key=>$sb)
-									<li class="@if($key == 0) active @endif"><a href="#tab{{ $sb->id }}" data-toggle="tab">{{ $sb->sub_category }}</a></li>
-									@endforeach
-								</ul>
-							</div>
-							<div class="tab-content">
-								@foreach($subCategories as $key=>$sb)
-								<div class="tab-pane fade @if($key == 0) active @endif in" id="tab{{ $sb->id }}" >
-									<?php
-										$tabproduct = DB::table('products')->where('sub_category', $sb->id)->where('status', 1)->orderBy('id', 'DESC')->get();
-									?>
-									@foreach($tabproduct as $tp)
-									<div class="col-sm-3">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<?php
-														$explodeImage = explode(",", $tp->product_img);
-													?>
-													<img src="{{  URL::asset('ProductImg/' . $explodeImage[0]) }}" alt="" />
-													<h2><i class="fa fa-inr">&nbsp;</i>{{ $tp->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $tp->cost_price }}</del></h2>
-													<p>{{ $tp->product_name }}</p>
-													<form action="{{ route('cart.store') }}" method="POST">
-														{{ csrf_field() }}
-														<input type="hidden" value="{{ $tp->id }}" id="id" name="id">
-														<input type="hidden" value="{{ $tp->product_name }}" id="name" name="name">
-														<input type="hidden" value="{{ $tp->selling_price }}" id="price" name="price">
-														<input type="hidden" value="{{ $explodeImage[0] }}" id="img" name="img">
-														<input type="hidden" value="1" id="quantity" name="quantity">
-														<button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-													</form>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									@endforeach
-								</div>
-								@endforeach
-							</div>
-						</div>
-						<!--/category-tab-->
-						@else
+						
 						<div class="row">
 						@foreach($products as $p)
 						<div class="col-sm-3">
@@ -272,8 +218,6 @@
 						@endforeach
 						</div>
 						
-						{{ $products->links() }}
-						@endif
 						
 					</div><!--features_items-->
 				</div>

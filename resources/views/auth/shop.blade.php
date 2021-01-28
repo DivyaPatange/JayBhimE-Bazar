@@ -143,13 +143,15 @@
 							<h2>Brands</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-									<li><a href=""> <span class="pull-right">(50)</span>Acne</a></li>
-									<li><a href=""> <span class="pull-right">(56)</span>Grüne Erde</a></li>
-									<li><a href=""> <span class="pull-right">(27)</span>Albiro</a></li>
-									<li><a href=""> <span class="pull-right">(32)</span>Ronhill</a></li>
-									<li><a href=""> <span class="pull-right">(5)</span>Oddmolly</a></li>
-									<li><a href=""> <span class="pull-right">(9)</span>Boudestijn</a></li>
-									<li><a href=""> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
+								<marquee scrollamount="2" width="100%" direction="down" height="250px" onmouseover="this.stop();"
+           onmouseout="this.start();">
+								<?php
+									$brand = DB::table('brands')->where('status', 1)->orderBy('id', 'DESC')->get();
+								?>
+									@foreach($brand as $b)
+									<li style="padding: 10px 0px; border-bottom: 1px solid #f0f0f0;"><a href="{{ route('getProductByBrand', $b->id) }}"> {{ $b->brand_name }}</a></li>
+									@endforeach		
+								</marquee>
 								</ul>
 							</div>
 						</div><!--/brands_products-->
@@ -180,17 +182,36 @@
 						<div class="col-sm-3">
 							<div class="product-image-wrapper">
 								<div class="single-products">
+									<?php
+										$explodeImage = explode(",", $p->product_img);
+									?>
 										<div class="productinfo text-center">
-											<img src="{{  URL::asset('ProductImg/' . $p->product_img) }}" alt="" class="img-fluid" />
+											<img src="{{  URL::asset('ProductImg/' . $explodeImage[0]) }}" alt="" class="img-fluid" />
 											<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
 											<p>{{ $p->product_name }}</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											<form action="{{ route('cart.store') }}" method="POST">
+												{{ csrf_field() }}
+												<input type="hidden" value="{{ $p->id }}" id="id" name="id">
+												<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
+												<input type="hidden" value="{{ $p->selling_price }}" id="price" name="price">
+												<input type="hidden" value="{{ $explodeImage[0] }}" id="img" name="img">
+												<input type="hidden" value="1" id="quantity" name="quantity">
+												<button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+											</form>
 										</div>
 										<div class="product-overlay">
 											<div class="overlay-content">
 												<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
 												<p>{{ $p->product_name }}</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												<form action="{{ route('cart.store') }}" method="POST">
+													{{ csrf_field() }}
+													<input type="hidden" value="{{ $p->id }}" id="id" name="id">
+													<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
+													<input type="hidden" value="{{ $p->selling_price }}" id="price" name="price">
+													<input type="hidden" value="{{ $explodeImage[0] }}" id="img" name="img">
+													<input type="hidden" value="1" id="quantity" name="quantity">
+													<button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+												</form>
 											</div>
 										</div>
 								</div>

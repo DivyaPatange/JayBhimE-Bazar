@@ -189,28 +189,28 @@
 								@foreach($subCategories as $key=>$sb)
 								<div class="tab-pane fade @if($key == 0) active @endif in" id="tab{{ $sb->id }}" >
 									<?php
-										$tabproduct = DB::table('products')->where('sub_category', $sb->id)->where('status', 1)->orderBy('id', 'DESC')->get();
+                                        $tabproduct = DB::table('products')->where('sub_category', $sb->id)->where('status', 1)->orderBy('id', 'DESC')->get();
 									?>
 									@foreach($tabproduct as $tp)
+                                    <?php 
+                                        $explodeImage = explode(",", $tp->product_img);
+                                    ?>
 									<div class="col-sm-3">
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<?php
-														$explodeImage = explode(",", $tp->product_img);
-													?>
 													<img src="{{  URL::asset('ProductImg/' . $explodeImage[0]) }}" alt="" />
 													<h2><i class="fa fa-inr">&nbsp;</i>{{ $tp->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $tp->cost_price }}</del></h2>
 													<p>{{ $tp->product_name }}</p>
-													<form action="{{ route('cart.store') }}" method="POST">
-														{{ csrf_field() }}
-														<input type="hidden" value="{{ $tp->id }}" id="id" name="id">
-														<input type="hidden" value="{{ $tp->product_name }}" id="name" name="name">
-														<input type="hidden" value="{{ $tp->selling_price }}" id="price" name="price">
-														<input type="hidden" value="{{ $explodeImage[0] }}" id="img" name="img">
-														<input type="hidden" value="1" id="quantity" name="quantity">
-														<button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-													</form>
+                                                    <form action="{{ route('cart.store') }}" method="POST">
+                                                        {{ csrf_field() }}
+                                                        <input type="hidden" value="{{ $tp->id }}" id="id" name="id">
+                                                        <input type="hidden" value="{{ $tp->product_name }}" id="name" name="name">
+                                                        <input type="hidden" value="{{ $tp->selling_price }}" id="price" name="price">
+                                                        <input type="hidden" value="{{ $explodeImage[0] }}" id="img" name="img">
+                                                        <input type="hidden" value="1" id="quantity" name="quantity">
+                                                        <button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                                    </form>
 												</div>
 												
 											</div>

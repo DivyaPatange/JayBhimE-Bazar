@@ -47,9 +47,12 @@ Route::get('/login', function () {
 
 Route::get('/single-product/{id}', [DesignController::class, 'singleProduct'])->name('single.product');
 Route::get('/single-products/{id}', [DesignController::class, 'singleCategoryProduct'])->name('single.category.product');
+Route::get('/brand-products/{id}', [DesignController::class, 'getProductByBrand'])->name('getProductByBrand');
 Route::get('/cart', [CartController::class, 'cart'])->name('cart.index');
 Route::post('/add', [CartController::class, 'add'])->name('cart.store');
 Route::post('/update', [CartController::class, 'update'])->name('cart.update');
+Route::post('/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
