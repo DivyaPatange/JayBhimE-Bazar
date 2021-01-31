@@ -26,7 +26,7 @@ class CartController extends Controller
     public function cart()
     {
         $cartCollection = \Cart::getContent();
-        dd($cartCollection);
+        // dd($cartCollection);
         return view('auth.cart', compact('cartCollection'));
     }
 

@@ -25,7 +25,7 @@
 	@include('auth.auth_layout.footer')
 	
     @include('auth.auth_layout.script')
-  
+  @yield('customjs')
     
 </body>
 </html>

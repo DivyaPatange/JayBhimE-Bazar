@@ -2,7 +2,7 @@
 @section('title', 'Index')
 @section('customcss')
 <style>
-#radioBtn .notActive{
+.radioBtn .notActive{
     color: #3276b1;
     background-color: #fff;
 }
@@ -293,12 +293,12 @@
 													{{ csrf_field() }}
 													<p>Size</p>
 													<div class="input-group" style="margin:auto">
-														<div id="radioBtn" class="btn-group">
+														<div id="" class="btn-group radioBtn">
 														@for($i=0; $i< count($explodeSize); $i++)
-															<a class="btn btn-primary btn-sm @if($i == 0) active @else notActive @endif" data-toggle="size" data-title="{{ $explodeSize[$i] }}" value="{{ $explodeSize[$i] }}" style="margin-bottom:5px">{{ $explodeSize[$i] }}</a>
+															<a class="btn btn-primary btn-sm @if($i == 0) active @else notActive @endif" data-toggle="size{{ $p->id }}" data-title="{{ $explodeSize[$i] }}" value="{{ $explodeSize[$i] }}" style="margin-bottom:5px">{{ $explodeSize[$i] }}</a>
 														@endfor
 														</div>
-														<input type="hidden" name="size" id="size" value="{{ $explodeSize[0] }}">
+														<input type="hidden" name="size" id="size{{ $p->id }}">
 													</div>
 													<input type="hidden" value="{{ $p->id }}" id="id" name="id">
 													<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
@@ -686,10 +686,12 @@
 	
 @endsection
 @section('customjs')
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
-$('#radioBtn a').on('click', function(){
+$('.radioBtn a').on('click', function(){
     var sel = $(this).data('title');
     var tog = $(this).data('toggle');
+	// alert(tog);
     $('#'+tog).prop('value', sel);
     
     $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
