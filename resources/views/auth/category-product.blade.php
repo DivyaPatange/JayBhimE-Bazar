@@ -201,6 +201,7 @@
 													?>
 													<img src="{{  URL::asset('ProductImg/' . $explodeImage[0]) }}" alt="" />
 													<h2><i class="fa fa-inr">&nbsp;</i>{{ $tp->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $tp->cost_price }}</del></h2>
+													<p><b>Size : </b>{{ $tp->size }}</p>
 													<p>{{ $tp->product_name }}</p>
 													<form action="{{ route('cart.store') }}" method="POST">
 														{{ csrf_field() }}

@@ -201,6 +201,7 @@
 												<div class="productinfo text-center">
 													<img src="{{  URL::asset('ProductImg/' . $explodeImage[0]) }}" alt="" />
 													<h2><i class="fa fa-inr">&nbsp;</i>{{ $tp->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $tp->cost_price }}</del></h2>
+													<p><b>Size : </b>{{ $tp->size }}</p>
 													<p>{{ $tp->product_name }}</p>
                                                     <form action="{{ route('cart.store') }}" method="POST">
                                                         {{ csrf_field() }}
@@ -234,9 +235,11 @@
 										<div class="productinfo text-center">
 											<img src="{{  URL::asset('ProductImg/' . $explodeImage[0]) }}" alt="" class="img-fluid" />
 											<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
+											<p><b>Size : </b>{{ $p->size }}</p>
 											<p>{{ $p->product_name }}</p>
 											<form action="{{ route('cart.store') }}" method="POST">
 												{{ csrf_field() }}
+												
 												<input type="hidden" value="{{ $p->id }}" id="id" name="id">
 												<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
 												<input type="hidden" value="{{ $p->selling_price }}" id="price" name="price">
@@ -248,6 +251,7 @@
 										<div class="product-overlay">
 											<div class="overlay-content">
 												<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
+												<p><b>Size : </b>{{ $p->size }}</p>
 												<p>{{ $p->product_name }}</p>
 												<form action="{{ route('cart.store') }}" method="POST">
 												{{ csrf_field() }}

@@ -180,6 +180,7 @@
 										<div class="productinfo text-center">
 											<img src="{{  URL::asset('ProductImg/' . $explodeImage[0]) }}" alt="" class="img-fluid" />
 											<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
+											<p><b>Size : </b>{{ $p->size }}</p>
 											<p>{{ $p->product_name }}</p>
 											<form action="{{ route('cart.store') }}" method="POST">
 												{{ csrf_field() }}
@@ -194,6 +195,7 @@
 										<div class="product-overlay">
 											<div class="overlay-content">
 												<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
+												<p><b>Size : </b>{{ $p->size }}</p>
 												<p>{{ $p->product_name }}</p>
 												<form action="{{ route('cart.store') }}" method="POST">
 												{{ csrf_field() }}

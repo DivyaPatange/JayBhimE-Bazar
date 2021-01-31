@@ -14,7 +14,9 @@ class CartController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'quantity' => $request->quantity,
+            // 'size' => $request->size,
             'attributes' => array(
+                'size' => $request->size,
                 'image' => $request->img,
             )
         ));
@@ -24,6 +26,7 @@ class CartController extends Controller
     public function cart()
     {
         $cartCollection = \Cart::getContent();
+        dd($cartCollection);
         return view('auth.cart', compact('cartCollection'));
     }
 
