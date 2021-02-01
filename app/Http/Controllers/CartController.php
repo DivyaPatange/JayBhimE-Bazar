@@ -36,13 +36,26 @@ class CartController extends Controller
     }
 
     public function update(Request $request){
+        $size = $request->size;
+        // dd($size);
         \Cart::update($request->id,
             array(
                 'quantity' => array(
                     'relative' => false,
                     'value' => $request->quantity
                 ),
+                
         ));
+        if($request->size != null)
+        {
+            \Cart::update($request->id,
+            array(
+                'attributes' => array(
+                    'size' => $request->size,
+                    'image' => $request->image,
+                ),
+            ));
+        }
         return redirect()->route('cart.index')->with('success_msg', 'Cart is Updated!');
     }
     public function clear(){

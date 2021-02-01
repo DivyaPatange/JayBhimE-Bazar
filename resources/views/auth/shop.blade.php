@@ -1,7 +1,12 @@
 @extends('auth.auth_layout.mainlayout')
 @section('title', 'Index')
 @section('customcss')
-
+<style>
+.radioBtn .notActive{
+    color: #3276b1;
+    background-color: #fff;
+}
+</style>
 @endsection
 @section('content')
 <section id="advertisement">
@@ -184,6 +189,7 @@
 								<div class="single-products">
 									<?php
 										$explodeImage = explode(",", $p->product_img);
+										$exSize = explode(",", $p->size);
 									?>
 										<div class="productinfo text-center">
 											<img src="{{  URL::asset('ProductImg/' . $explodeImage[0]) }}" alt="" class="img-fluid" />
@@ -191,6 +197,17 @@
 											<p>{{ $p->product_name }}</p>
 											<form action="{{ route('cart.store') }}" method="POST">
 												{{ csrf_field() }}
+												@if($p->size)
+												<p style="margin-bottom:0px">Size</p>
+												<div class="input-group" style="margin:auto">
+													<div id="" class="btn-group radioBtn">
+													@for($i=0; $i< count($exSize); $i++)
+														<a class="btn btn-primary btn-sm @if($i == 0) active @else notActive @endif" data-toggle="size{{ $p->id }}" data-title="{{ $exSize[$i] }}" value="{{ $exSize[$i] }}" style="margin-bottom:5px">{{ $exSize[$i] }}</a>
+													@endfor
+													</div>
+													<input type="hidden" name="size" id="size{{ $p->id }}" value="{{ $exSize[0] }}">
+												</div>
+												@endif
 												<input type="hidden" value="{{ $p->id }}" id="id" name="id">
 												<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
 												<input type="hidden" value="{{ $p->selling_price }}" id="price" name="price">
@@ -204,14 +221,25 @@
 												<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
 												<p>{{ $p->product_name }}</p>
 												<form action="{{ route('cart.store') }}" method="POST">
-													{{ csrf_field() }}
-													<input type="hidden" value="{{ $p->id }}" id="id" name="id">
-													<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
-													<input type="hidden" value="{{ $p->selling_price }}" id="price" name="price">
-													<input type="hidden" value="{{ $explodeImage[0] }}" id="img" name="img">
-													<input type="hidden" value="1" id="quantity" name="quantity">
-													<button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-												</form>
+												{{ csrf_field() }}
+												@if($p->size)
+												<p style="margin-bottom:0px">Size</p>
+												<div class="input-group" style="margin:auto">
+													<div id="" class="btn-group radioBtn">
+													@for($i=0; $i< count($exSize); $i++)
+														<a class="btn btn-primary btn-sm @if($i == 0) active @else notActive @endif" data-toggle="size{{ $p->id }}" data-title="{{ $exSize[$i] }}" value="{{ $exSize[$i] }}" style="margin-bottom:5px">{{ $exSize[$i] }}</a>
+													@endfor
+													</div>
+													<input type="hidden" name="size" id="size{{ $p->id }}" value="{{ $exSize[0] }}">
+												</div>
+												@endif
+												<input type="hidden" value="{{ $p->id }}" id="id" name="id">
+												<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
+												<input type="hidden" value="{{ $p->selling_price }}" id="price" name="price">
+												<input type="hidden" value="{{ $explodeImage[0] }}" id="img" name="img">
+												<input type="hidden" value="1" id="quantity" name="quantity">
+												<button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+											</form>
 											</div>
 										</div>
 								</div>
@@ -234,5 +262,16 @@
 	</section>
 @endsection
 @section('customjs')
-
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+$('.radioBtn a').on('click', function(){
+    var sel = $(this).data('title');
+    var tog = $(this).data('toggle');
+	// alert(tog);
+    $('#'+tog).prop('value', sel);
+    
+    $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
+    $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
+})
+</script>
 @endsection
