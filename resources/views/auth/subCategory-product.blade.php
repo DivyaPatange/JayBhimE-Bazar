@@ -1,7 +1,12 @@
 @extends('auth.auth_layout.mainlayout')
 @section('title', 'Index')
 @section('customcss')
-
+<style>
+.radioBtn .notActive{
+    color: #3276b1;
+    background-color: #fff;
+}
+</style>
 @endsection
 @section('content')
 <section>
@@ -201,10 +206,23 @@
 												<div class="productinfo text-center">
 													<img src="{{  URL::asset('ProductImg/' . $explodeImage[0]) }}" alt="" />
 													<h2><i class="fa fa-inr">&nbsp;</i>{{ $tp->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $tp->cost_price }}</del></h2>
-													<p><b>Size : </b>{{ $tp->size }}</p>
 													<p>{{ $tp->product_name }}</p>
                                                     <form action="{{ route('cart.store') }}" method="POST">
                                                         {{ csrf_field() }}
+                                                        <?php 
+        													$explodeSize = explode(",", $tp->size);
+        												?>
+        												@if($tp->size)
+        												<p style="margin-bottom:0px">Size</p>
+        												<div class="input-group" style="margin:auto">
+        													<div id="" class="btn-group radioBtn">
+        													@for($i=0; $i< count($explodeSize); $i++)
+        														<a class="btn btn-primary btn-sm @if($i == 0) active @else notActive @endif" data-toggle="size{{ $tp->id }}" data-title="{{ $explodeSize[$i] }}" value="{{ $explodeSize[$i] }}" style="margin-bottom:5px">{{ $explodeSize[$i] }}</a>
+        													@endfor
+        													</div>
+        													<input type="hidden" name="size" id="size{{ $tp->id }}" value="{{ $explodeSize[0] }}">
+        												</div>
+        												@endif
                                                         <input type="hidden" value="{{ $tp->id }}" id="id" name="id">
                                                         <input type="hidden" value="{{ $tp->product_name }}" id="name" name="name">
                                                         <input type="hidden" value="{{ $tp->selling_price }}" id="price" name="price">
@@ -235,11 +253,9 @@
 										<div class="productinfo text-center">
 											<img src="{{  URL::asset('ProductImg/' . $explodeImage[0]) }}" alt="" class="img-fluid" />
 											<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
-											<p><b>Size : </b>{{ $p->size }}</p>
 											<p>{{ $p->product_name }}</p>
 											<form action="{{ route('cart.store') }}" method="POST">
 												{{ csrf_field() }}
-												
 												<input type="hidden" value="{{ $p->id }}" id="id" name="id">
 												<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
 												<input type="hidden" value="{{ $p->selling_price }}" id="price" name="price">
@@ -251,7 +267,6 @@
 										<div class="product-overlay">
 											<div class="overlay-content">
 												<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
-												<p><b>Size : </b>{{ $p->size }}</p>
 												<p>{{ $p->product_name }}</p>
 												<form action="{{ route('cart.store') }}" method="POST">
 												{{ csrf_field() }}
@@ -286,5 +301,16 @@
 	</section>
 @endsection
 @section('customjs')
-
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+$('.radioBtn a').on('click', function(){
+    var sel = $(this).data('title');
+    var tog = $(this).data('toggle');
+	// alert(tog);
+    $('#'+tog).prop('value', sel);
+    
+    $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
+    $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
+})
+</script>
 @endsection

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\DesignController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\User\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,16 @@ Route::post('/add', [CartController::class, 'add'])->name('cart.store');
 Route::post('/update', [CartController::class, 'update'])->name('cart.update');
 Route::post('/remove', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
+
+Route::get('/orders', [OrderController::class, 'index'])->name('user.order.index');
+Route::post('/placeOrder', [OrderController::class, 'placedOrder'])->name('checkout.place.order');
+Route::get('/orderDetails/{id}', [OrderController::class, 'orderDetails'])->name('order.details');
+Route::get('/placedOrder', [OrderController::class, 'placedOrderDetails'])->name('user.placedOrder');
+// Payment Route
+Route::post('/payment/{id}', [OrderController::class, 'payment'])->name('pay');
+Route::post('/success', [OrderController::class, 'paymentSuccess'])->name('success');
+Route::get('/placedOrder', [OrderController::class, 'placedOrderDetails'])->name('user.placedOrder');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
