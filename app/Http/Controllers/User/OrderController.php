@@ -29,11 +29,13 @@ class OrderController extends Controller
     {
         $user = DB::table('users')->where('id', Auth::user()->id)->first();
         // dd($user);
+        $total = \Cart::getSubTotal() + 49;
+        // dd($total);
         $order = Order::create([
             'order_number'      =>  'ORD-'.strtoupper(uniqid()),
             'user_id'           => auth()->user()->id,
             'status'            =>  'pending',
-            'grand_total'       =>  \Cart::getSubTotal(),
+            'grand_total'       =>  $total,
             'item_count'        =>  \Cart::getTotalQuantity(),
             'payment_status'    =>  0,
             'name'        =>  auth()->user()->name,

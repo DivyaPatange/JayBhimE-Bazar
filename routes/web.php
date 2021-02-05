@@ -82,4 +82,6 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('/product', ProductController::class);
     Route::get('get-subcategory-list', [ProductController::class, 'getSubCategoryList']);
     Route::get('get-parentSubCategory-list', [ProductController::class, 'parentSubCategory']);
+    Route::get('/placedOrder', [App\Http\Controllers\Admin\OrderController::class, 'placedOrderDetails'])->name('placedOrder');
+    Route::get('/orderDetails/{id}', [App\Http\Controllers\Admin\OrderController::class, 'orderDetails'])->name('orderDetails');
 });

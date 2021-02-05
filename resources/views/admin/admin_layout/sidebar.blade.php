@@ -202,6 +202,12 @@
                                         </li>
                                      </ul> -->
                                 </li>
+                                <li class="">
+                                    <a href="{{ route('admin.placedOrder') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>BC</b></span>
+                        <span class="pcoded-mtext">Placed Order</span>
+                        <span class="pcoded-mcaret"></span>
+                      </a>
                             </ul>
                             <!-- <div class="pcoded-navigation-label">UI Element</div>  -->
                             <ul class="pcoded-item pcoded-left-item">

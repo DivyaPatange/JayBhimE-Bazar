@@ -1,5 +1,5 @@
 @extends('auth.auth_layout.mainlayout')
-@section('title', 'Dashboard')
+@section('title', 'Order Details')
 @section('customcss')
 
 @endsection
@@ -37,12 +37,16 @@
                                 <tr>
                                     <th>Order Number</th>
                                     <th>Product Count</th>
+                                    <th>Price</th>
+                                    <th>Shipping Charges</th>
                                     <th>Total</th>
                                 </tr>
                                 <tr>
                                     <td>{{ $order->order_number }}</td>
                                     <td>{{ $order->item_count }}</td>
-                                    <td>INR {{ $order->grand_total }}</td>
+                                    <td><i class="fa fa-inr"></i> {{ $order->grand_total - 49 }}</td>
+                                    <td><i class="fa fa-inr"></i> 49</td>
+                                    <td><i class="fa fa-inr"></i> {{ $order->grand_total }}</td>
                                 </tr>
                                 <tr>
                                 </tr>
