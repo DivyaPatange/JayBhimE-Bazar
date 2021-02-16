@@ -11,6 +11,7 @@ use App\Models\OrderItem;
 use App\Models\Admin\Product;
 use App\Models\User;
 use App\Models\Payment;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -64,6 +65,16 @@ class OrderController extends Controller
                 \Cart::clear();
             }
         }
+        $data["email"] = "divyapatange0@gmail.com";
+        $data["title"] = "Order Placed";
+        $order1 = DB::table('orders')->where('id', $order->id)->first();
+        $orderArray = (array)$order1;
+        // dd($orderArray);
+        Mail::send('email.orderPlace', $orderArray, function($message)use($data) {
+            $message->to($data["email"], $data["email"])
+                    ->subject($data["title"]);
+            
+        });
         return redirect()->route('order.details', $order->id)->with('success', "Order Placed Successfully!");
     }
 
