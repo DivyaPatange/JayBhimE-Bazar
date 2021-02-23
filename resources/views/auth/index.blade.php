@@ -259,73 +259,9 @@
 							$product = DB::table('products')->where('status', 1)->orderBy('id', 'DESC')->take(6)->get(); 
 						?>
 						<div class="row">
-						@foreach($product as $p)
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-										<div class="productinfo text-center">
-										<?php
-											$explodeProductImage = explode(",", $p->product_img);
-										?>
-											<img src="{{  URL::asset('ProductImg/' . $explodeProductImage[0]) }}" alt="" class="img-fluid" />
-											<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
-											<p>{{ $p->product_name }}</p>
-											<form action="{{ route('cart.store') }}" method="POST">
-												{{ csrf_field() }}
-												<?php 
-													$explodeSize = explode(",", $p->size);
-												?>
-												<p style="margin-bottom:0px">Size</p>
-												<div class="input-group" style="margin:auto">
-													<div id="" class="btn-group radioBtn">
-													@for($i=0; $i< count($explodeSize); $i++)
-														<a class="btn btn-primary btn-sm @if($i == 0) active @else notActive @endif" data-toggle="size{{ $p->id }}" data-title="{{ $explodeSize[$i] }}" value="{{ $explodeSize[$i] }}" style="margin-bottom:5px">{{ $explodeSize[$i] }}</a>
-													@endfor
-													</div>
-													<input type="hidden" name="size" id="size{{ $p->id }}" value="{{ $explodeSize[0] }}">
-												</div>
-												<input type="hidden" value="{{ $p->id }}" id="id" name="id">
-												<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
-												<input type="hidden" value="{{ $p->selling_price }}" id="price" name="price">
-												<input type="hidden" value="{{ $explodeProductImage[0] }}" id="img" name="img">
-												<input type="hidden" value="1" id="quantity" name="quantity">
-												<button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</form>
-										</div>
-										<div class="product-overlay">
-											<div class="overlay-content">
-												<h2><i class="fa fa-inr">&nbsp;</i>{{ $p->selling_price }} - <del><i class="fa fa-inr">&nbsp;</i>{{ $p->cost_price }}</del></h2>
-												<p>{{ $p->product_name }}</p>
-												<form action="{{ route('cart.store') }}" method="POST">
-													{{ csrf_field() }}
-													<p style="margin-bottom:0px">Size</p>
-													<div class="input-group" style="margin:auto">
-														<div id="" class="btn-group radioBtn">
-														@for($i=0; $i< count($explodeSize); $i++)
-															<a class="btn btn-primary btn-sm @if($i == 0) active @else notActive @endif" data-toggle="size{{ $p->id }}" data-title="{{ $explodeSize[$i] }}" value="{{ $explodeSize[$i] }}" style="margin-bottom:5px">{{ $explodeSize[$i] }}</a>
-														@endfor
-														</div>
-														<input type="hidden" name="size" id="size{{ $p->id }}" value="{{ $explodeSize[0] }}">
-													</div>
-													<input type="hidden" value="{{ $p->id }}" id="id" name="id">
-													<input type="hidden" value="{{ $p->product_name }}" id="name" name="name">
-													<input type="hidden" value="{{ $p->selling_price }}" id="price" name="price">
-													<input type="hidden" value="{{ $explodeProductImage[0] }}" id="img" name="img">
-                                        			<input type="hidden" value="1" id="quantity" name="quantity">
-													<button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-												</form>
-											</div>
-										</div>
-								</div>
-								<!-- <div class="choose">
-									<ul class="nav nav-pills nav-justified">
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-									</ul>
-								</div> -->
-							</div>
-						</div>
-						@endforeach
+							{{ csrf_field() }}
+							<div id="post_data"></div>
+						
 						</div>
 						
 					</div><!--features_items-->
@@ -716,7 +652,7 @@
 @section('customjs')
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
-$('.radioBtn a').on('click', function(){
+$(document).on('click', '.radioBtn a', function(){
     var sel = $(this).data('title');
     var tog = $(this).data('toggle');
 	// alert(tog);
@@ -725,5 +661,34 @@ $('.radioBtn a').on('click', function(){
     $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
     $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
 })
+</script>
+<script>
+$(document).ready(function(){
+ 
+ var _token = $('input[name="_token"]').val();
+
+ load_data('', _token);
+
+ function load_data(id="", _token)
+ {
+  $.ajax({
+   url:"{{ route('loadmore.load_data') }}",
+   method:"POST",
+   data:{id:id, _token:_token},
+   success:function(data)
+   {
+    $('#load_more_button').remove();
+    $('#post_data').append(data);
+   }
+  })
+ }
+
+ $(document).on('click', '#load_more_button', function(){
+  var id = $(this).data('id');
+  $('#load_more_button').html('<b>Loading...</b>');
+  load_data(id, _token);
+ });
+
+});
 </script>
 @endsection

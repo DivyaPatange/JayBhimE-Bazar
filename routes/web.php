@@ -27,6 +27,8 @@ use App\Http\Controllers\User\OrderController;
 Route::get('/', function () {
     return view('auth.index');
 });
+Route::post('/loadmore/load_data', [DesignController::class, 'load_data'])->name('loadmore.load_data');
+
 Route::get('/blog', function () {
     return view('auth.blog');
 });
