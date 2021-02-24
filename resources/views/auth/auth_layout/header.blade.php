@@ -85,11 +85,37 @@
 										<li><a href="{{ url('login') }}">Login</a></li> 
                                     </ul>
                                 </li> 
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+								<?php 
+									$category = DB::table('categories')->where('category_name', 'Clothes')->first();
+									// dd($category);
+									$subCategory1 = DB::table('sub_categories')->where('category_id', $category->id)->where('parent_id', 0)->where('status', 1)->get();
+									// dd($subCategory);
+								?>
+								@foreach($subCategory1 as $sub)
+								<li class="dropdown menu-large ">	<a href="# " class="dropdown-toggle " data-toggle="dropdown ">{{ $sub->sub_category }} <i class="fa fa-angle-down"></i></a>
+									<?php
+										$subCategory2 = DB::table('sub_categories')->where('parent_id', $sub->id)->where('status', 1)->get();
+										// dd($subCategory2);
+									?>
+									<ul class="dropdown-menu megamenu row ">
+										@foreach($subCategory2 as $sub2)
+										<li class="col-sm-6" style="padding:0px">
+											<ul>
+												<li><a href="{{ route('subCategory.product', $sub2->id) }}">{{ $sub2->sub_category }}</a>
+
+												</li>
+												
+											</ul>
+										</li>
+										@endforeach
+									</ul>
+								</li>
+								@endforeach
+								<!-- <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="{{ url('blog') }}">Blog List</a></li>
                                     </ul>
-                                </li> 
+                                </li>  -->
 								<li><a href="{{ url('contact') }}">Contact</a></li>
 							</ul>
 						</div>

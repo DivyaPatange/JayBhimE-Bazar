@@ -10,12 +10,32 @@
 
     @include('auth.auth_layout.link')
 
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     @yield('customcss')
     <style>
         .social-icons ul li a{
             color:white
         }
+        
+        .menu-large {
+            position: static !important;
+        }
     </style>
+    
+<script>
+	// Dropdown Menu Fade    
+jQuery(document).ready(function () {
+    $(".dropdown").hover(
+
+    function () {
+        $('.dropdown-menu', this).stop().fadeIn("fast");
+    },
+
+    function () {
+        $('.dropdown-menu', this).stop().fadeOut("fast");
+    });
+});
+</script>
 </head><!--/head-->
 
 <body>

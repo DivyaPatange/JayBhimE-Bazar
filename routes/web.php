@@ -48,6 +48,9 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
+Route::get('/product/{id}', [DesignController::class, 'productDetails'])->name('show.product');
+Route::get('products/{id}', [DesignController::class, 'SubCategoryProduct'])->name('subCategory.product');
+Route::post('load-subCategory-product/{sub}', [DesignController::class, 'loadSubCategoryProduct'])->name('subCategory1.product');
 Route::get('/single-product/{id}', [DesignController::class, 'singleProduct'])->name('single.product');
 Route::get('/single-products/{id}', [DesignController::class, 'singleCategoryProduct'])->name('single.category.product');
 Route::get('/brand-products/{id}', [DesignController::class, 'getProductByBrand'])->name('getProductByBrand');
