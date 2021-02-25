@@ -27,7 +27,13 @@ use App\Http\Controllers\User\OrderController;
 Route::get('/', function () {
     return view('auth.index');
 });
-Route::post('/loadmore/load_data', [DesignController::class, 'load_data'])->name('loadmore.load_data');
+
+// Filter Route
+Route::post('/filter/category-product/{id}', [DesignController::class, 'load_data'])->name('filter.category-product');
+Route::post('filter-product', [DesignController::class, 'filterProduct'])->name('filter.product');
+Route::post('/filter/subCategory-product/{id}', [DesignController::class, 'loadSubCategoryProduct'])->name('filter.subCategory-product');
+Route::post('/filter/brand-product/{id}', [DesignController::class, 'filterBrandProduct'])->name('filter.brand-product');
+Route::post('/filter/parentSubCategory-product/{id}', [DesignController::class, 'filterParentSubCategoryProduct'])->name('filter.parentSubCategoryProduct');
 
 Route::get('/blog', function () {
     return view('auth.blog');
@@ -50,7 +56,6 @@ Route::get('/login', function () {
 
 Route::get('/product/{id}', [DesignController::class, 'productDetails'])->name('show.product');
 Route::get('products/{id}', [DesignController::class, 'SubCategoryProduct'])->name('subCategory.product');
-Route::post('load-subCategory-product/{sub}', [DesignController::class, 'loadSubCategoryProduct'])->name('subCategory1.product');
 Route::get('/single-product/{id}', [DesignController::class, 'singleProduct'])->name('single.product');
 Route::get('/single-products/{id}', [DesignController::class, 'singleCategoryProduct'])->name('single.category.product');
 Route::get('/brand-products/{id}', [DesignController::class, 'getProductByBrand'])->name('getProductByBrand');

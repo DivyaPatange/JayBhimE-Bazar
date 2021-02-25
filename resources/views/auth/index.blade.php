@@ -11,7 +11,12 @@
     color: #3276b1;
     background-color: #fff;
 }
-
+#loading
+{
+ text-align:center; 
+ background: url('{{ asset('8.gif') }}') no-repeat center; 
+ height: 150px;
+}
 </style>
 
 @endsection
@@ -99,169 +104,23 @@
 				@endif
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-3">
-					<div class="left-sidebar">
-						<h2>Category</h2>
-						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
-								<?php
-									$categories = DB::table('categories')->where('status', 1)->get();
-								?>
-							@foreach($categories as $c)
-									<?php
-										$subCategories = DB::table('sub_categories')->where('category_id', $c->id)->where('parent_id', 0)->where('status', 1)->get();
-									?>
-									@if(count($subCategories) > 0)
-									
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											<a data-toggle="collapse" data-parent="#accordian" href="#product{{ $c->id }}">
-												<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-												{{ $c->category_name }}
-											</a>
-										</h4>
-									</div>
-									
-									<div id="product{{ $c->id }}" class="panel-collapse collapse">
-										<div class="panel-body">
-											<ul>
-												@foreach($subCategories as $s)
-												<li><a href="{{ route('single.category.product', $s->id) }}">{{ $s->sub_category }} </a></li>
-												@endforeach
-											</ul>
-										</div>
-									</div>
-								</div>
-								@else
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title"><a href="{{ route('single.product', $c->id) }}">{{ $c->category_name }}</a></h4>
-									</div>
-								</div>
-								@endif
-							@endforeach
-							<!-- <div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#mens">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Mens
-										</a>
-									</h4>
-								</div>
-								<div id="mens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Fendi</a></li>
-											<li><a href="#">Guess</a></li>
-											<li><a href="#">Valentino</a></li>
-											<li><a href="#">Dior</a></li>
-											<li><a href="#">Versace</a></li>
-											<li><a href="#">Armani</a></li>
-											<li><a href="#">Prada</a></li>
-											<li><a href="#">Dolce and Gabbana</a></li>
-											<li><a href="#">Chanel</a></li>
-											<li><a href="#">Gucci</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#womens">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Womens
-										</a>
-									</h4>
-								</div>
-								<div id="womens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Fendi</a></li>
-											<li><a href="#">Guess</a></li>
-											<li><a href="#">Valentino</a></li>
-											<li><a href="#">Dior</a></li>
-											<li><a href="#">Versace</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Kids</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Fashion</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Households</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Interiors</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Clothing</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Bags</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Shoes</a></h4>
-								</div>
-							</div> -->
-						</div><!--/category-products-->
-					
-						<div class="brands_products"><!--brands_products-->
-							<h2>Brands</h2>
-							<div class="brands-name">
-								<ul class="nav nav-pills nav-stacked">
-								<marquee scrollamount="2" width="100%" direction="down" height="250px" onmouseover="this.stop();"
-           onmouseout="this.start();">
-								<?php
-									$brand = DB::table('brands')->where('status', 1)->orderBy('id', 'DESC')->get();
-								?>
-									@foreach($brand as $b)
-									<li style="padding: 10px 0px; border-bottom: 1px solid #f0f0f0;"><a href="{{ route('getProductByBrand', $b->id) }}"> {{ $b->brand_name }}</a></li>
-									@endforeach		
-								</marquee>
-								</ul>
-							</div>
-						</div><!--/brands_products-->
-
-						<div class="price-range"><!--price-range-->
-							<h2>Price Range</h2>
-							<p>
-  <label for="amount">Price range:
-	
-	<input type="text" id="amount_start" name="start_price">
-  <input type="text" id="amount_end" name="end_price">
-  </label>
-</p>
- 
-<div id="slider-range"></div>
-<button type="button" id="filterPrice">Filter</button>
-						</div><!--/price-range-->
-						<div class="shipping text-center"><!--shipping-->
-							<img src="images/home/shipping.jpg" alt="" />
-						</div><!--/shipping-->
-					
-					</div>
+			<div class="row" >
+				<div class="col-md-4"></div>
+				<div class="col-md-4"></div>
+				<div class="col-md-4" style="margin-bottom:20px">
+					<select name="brand" id="brand" style="padding:12px">
+						<option value="">Sort By : Brands </option>
+						<?php
+							$brand = DB::table('brands')->where('status', 1)->orderBy('id', 'DESC')->get();
+						?>
+						@foreach($brand as $ba)
+						<option value="{{ $ba->id }}">{{ $ba->brand_name }}</option>
+						@endforeach
+					</select>
 				</div>
+			</div>
+			<div class="row">
+				@include('auth.auth_layout.sidebar')
 				
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
@@ -270,14 +129,14 @@
 							$product = DB::table('products')->where('status', 1)->orderBy('id', 'DESC')->take(6)->get(); 
 						?>
 						<div class="row">
-							{{ csrf_field() }}
 							<div id="post_data"></div>
 						
 						</div>
 						
 					</div><!--features_items-->
 					
-					<div class="category-tab"><!--category-tab-->
+					<!--category-tab-->
+					<!-- <div class="category-tab">
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
 							    <?php
@@ -334,7 +193,8 @@
 							@endforeach
 							
 						</div>
-					</div><!--/category-tab-->
+					</div> -->
+					<!--/category-tab-->
 					
 					
 					
@@ -361,53 +221,82 @@ $(document).on('click', '.radioBtn a', function(){
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 $(document).ready(function(){
- 
- var _token = $('input[name="_token"]').val();
 
- load_data('', _token, '', '');
+filter_data('');
 
- function load_data(id="", _token, start="", end="")
- {
-	//  var start = start;
-	// alert(start);
-  $.ajax({
-   url:"{{ route('loadmore.load_data') }}",
-   method:"POST",
-   data:{id:id, _token:_token, start:start, end:end},
-   success:function(data)
-   {
-	//    if(data.start){
-	// document.getElementById("post_data").innerHTML = "";
-	//    }
-    $('#load_more_button').remove();
-    $('#post_data').append(data);
-   }
-  })
- }
+function filter_data(id="")
+{	if(id == ""){
+	$('#post_data').html('<div id="loading" style="" ></div>');
+	}
+	// alert(id);
+	var minimum_price = $('#hidden_minimum_price').val();
+	var maximum_price = $('#hidden_maximum_price').val();
+	var brand = get_filter('brand');
+	var keyword = $('#search').val();
+	// alert(minimum_price);
+	$.ajax({
+		url:"{{ route('filter.product') }}",
+		method:"POST",
+		data:{minimum_price:minimum_price, maximum_price:maximum_price, brand:brand,id:id, keyword:keyword},
+		success:function(data){
+			var json = JSON.parse(data);
+			// alert(json.id);
+			
+			if(json.id)
+			{
+				$('#load_more_button').remove();
+				// alert(json.id);
+				$('#post_data').append(json.output);
+			}
+			else{
+				$('#post_data').html(json.output);
+			}
+			// if(json.id )
+		}
+	});
+}
 
- $(document).on('click', '#load_more_button', function(){
-  var id = $(this).data('id');
-  $('#load_more_button').html('<b>Loading...</b>');
-  load_data(id, _token);
- });
- $( "#slider-range" ).slider({
-	range: true,
-	min: 0,
-	max: 5000,
-	values: [ 700, 3000 ],
-	slide: function( event, ui ) {
-	$( "#amount_start" ).val(ui.values[ 0 ]);
-	$( "#amount_end" ).val(ui.values[ 1 ]);
+function get_filter(class_name)
+{
+	var brand = $("#brand").val();
+	return brand;
+}
+
+$('#brand').change(function(){
+	filter_data();
+});
+$('#search').keyup(function(){
+	filter_data();
+});
+$('#price_range').slider({
+	range:true,
+	min:100,
+	max:6500,
+	values:[100, 6500],
+	step:500,
+	stop:function(event, ui)
+	{
+		$('#price_show').html(ui.values[0] + ' - ' + ui.values[1]);
+		$('#hidden_minimum_price').val(ui.values[0]);
+		$('#hidden_maximum_price').val(ui.values[1]);
+		filter_data();
 	}
 });
-	$(document).on('click', '#filterPrice', function(){
-	  var start = $('#amount_start').val();
-	  var end = $('#amount_end').val();
-	  load_data('', _token, start, end);
-  })
+$(document).on('click', '#load_more_button', function(){
+  var id = $(this).data('id');
+  $('#load_more_button').html('<b>Loading...</b>');
+  filter_data(id);
+ });
 
 });
+
+
 
 </script>
   <script>

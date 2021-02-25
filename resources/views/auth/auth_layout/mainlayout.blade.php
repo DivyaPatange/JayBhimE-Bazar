@@ -20,6 +20,16 @@
         .menu-large {
             position: static !important;
         }
+        .ui-slider .ui-slider-handle
+        {
+            border-radius: 50%;
+        }
+        .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active
+        {
+
+            background-color: #484a8d;
+            border-radius:50%
+        }
     </style>
     
 <script>

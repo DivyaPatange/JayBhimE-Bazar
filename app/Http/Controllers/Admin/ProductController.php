@@ -63,7 +63,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'category_name' => 'required',
-            'parent_sub_category' => 'required',
+            // 'parent_sub_category' => 'required',
             'product_name' => 'required',
             'product_description' => 'required',
             'product_img' => 'required',

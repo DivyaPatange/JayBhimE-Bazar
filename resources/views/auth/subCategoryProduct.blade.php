@@ -3,78 +3,21 @@
 @section('customcss')
 <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style>
 .radioBtn .notActive{
     color: #3276b1;
     background-color: #fff;
 }
+#loading
+{
+ text-align:center; 
+ background: url('{{ asset('8.gif') }}') no-repeat center; 
+ height: 150px;
+}
 </style>
 @endsection
 @section('content')
-<section id="slider"><!--slider-->
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
-					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
-						<ol class="carousel-indicators">
-							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-							<li data-target="#slider-carousel" data-slide-to="1"></li>
-							<li data-target="#slider-carousel" data-slide-to="2"></li>
-						</ol>
-						
-						<div class="carousel-inner">
-							<div class="item active">
-								<div class="col-sm-6">
-									<h1><span style="font-family:FontAwesome;">jaibhimbazar</h1>
-									<h2>Shopping Online</h2>
-									<p>Shopping Becomes More Practical Economicalt</p>
-									<button type="button" class="btn btn-default get">Get it now</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="images/home/girl1.jpg" class="girl img-responsive" alt="" />
-									<img src="images/home/pricing.png"  class="pricing" alt="" />
-								</div>
-							</div>
-							<div class="item">
-								<div class="col-sm-6">
-									<h1><span style="font-family:FontAwesome;">jaibhimbazar</h1>
-									<h2>Shopping Online</h2>
-									<p>Fashion & Lifestyle in India. Buy Shoes, Clothing, Accessories and lifestyle products for women & men. Best Online Fashion Store</p>
-									<button type="button" class="btn btn-default get">Get it now</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="images/home/girl2.jpg" class="girl img-responsive" alt="" />
-									<img src="images/home/pricing.png"  class="pricing" alt="" />
-								</div>
-							</div>
-							
-							<div class="item">
-								<div class="col-sm-6">
-									<h1><span style="font-family:FontAwesome;">jaibhimbazar</h1>
-									<h2>Shopping Online</h2>
-									<p>Online Shopping For Women,Men,Kid's Fashion.</p>
-									<button type="button" class="btn btn-default get">Get it now</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
-									<img src="images/home/pricing.png" class="pricing" alt="" />
-								</div>
-							</div>
-							
-						</div>
-						
-						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-							<i class="fa fa-angle-left"></i>
-						</a>
-						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-							<i class="fa fa-angle-right"></i>
-						</a>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-	</section><!--/slider-->
 	
 	<section>
 		<div class="container">
@@ -95,173 +38,15 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-3">
-					<div class="left-sidebar">
-						<h2>Category</h2>
-						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
-								<?php
-									$categories = DB::table('categories')->where('status', 1)->get();
-								?>
-							@foreach($categories as $c)
-									<?php
-										$subCategories = DB::table('sub_categories')->where('category_id', $c->id)->where('parent_id', 0)->where('status', 1)->get();
-									?>
-									@if(count($subCategories) > 0)
-									
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											<a data-toggle="collapse" data-parent="#accordian" href="#product{{ $c->id }}">
-												<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-												{{ $c->category_name }}
-											</a>
-										</h4>
-									</div>
-									
-									<div id="product{{ $c->id }}" class="panel-collapse collapse">
-										<div class="panel-body">
-											<ul>
-												@foreach($subCategories as $s)
-												<li><a href="{{ route('single.category.product', $s->id) }}">{{ $s->sub_category }} </a></li>
-												@endforeach
-											</ul>
-										</div>
-									</div>
-								</div>
-								@else
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title"><a href="{{ route('single.product', $c->id) }}">{{ $c->category_name }}</a></h4>
-									</div>
-								</div>
-								@endif
-							@endforeach
-							<!-- <div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#mens">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Mens
-										</a>
-									</h4>
-								</div>
-								<div id="mens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Fendi</a></li>
-											<li><a href="#">Guess</a></li>
-											<li><a href="#">Valentino</a></li>
-											<li><a href="#">Dior</a></li>
-											<li><a href="#">Versace</a></li>
-											<li><a href="#">Armani</a></li>
-											<li><a href="#">Prada</a></li>
-											<li><a href="#">Dolce and Gabbana</a></li>
-											<li><a href="#">Chanel</a></li>
-											<li><a href="#">Gucci</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#womens">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Womens
-										</a>
-									</h4>
-								</div>
-								<div id="womens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Fendi</a></li>
-											<li><a href="#">Guess</a></li>
-											<li><a href="#">Valentino</a></li>
-											<li><a href="#">Dior</a></li>
-											<li><a href="#">Versace</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Kids</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Fashion</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Households</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Interiors</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Clothing</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Bags</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Shoes</a></h4>
-								</div>
-							</div> -->
-						</div><!--/category-products-->
-					
-						<div class="brands_products"><!--brands_products-->
-							<h2>Brands</h2>
-							<div class="brands-name">
-								<ul class="nav nav-pills nav-stacked">
-								<marquee scrollamount="2" width="100%" direction="down" height="250px" onmouseover="this.stop();"
-           onmouseout="this.start();">
-								<?php
-									$brand = DB::table('brands')->where('status', 1)->orderBy('id', 'DESC')->get();
-								?>
-									@foreach($brand as $b)
-									<li style="padding: 10px 0px; border-bottom: 1px solid #f0f0f0;"><a href="{{ route('getProductByBrand', $b->id) }}"> {{ $b->brand_name }}</a></li>
-									@endforeach		
-								</marquee>
-								</ul>
-							</div>
-						</div><!--/brands_products-->
-
-			
-						<div class="price-range"><!--price-range-->
-							<h2>Price Range</h2>
-							<div class="well text-center">
-								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-								 <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-							</div>
-						</div><!--/price-range-->
-						
-						<div class="shipping text-center"><!--shipping-->
-							<img src="images/home/shipping.jpg" alt="" />
-						</div><!--/shipping-->
-					
-					</div>
-				</div>
+				@include('auth.auth_layout.sidebar')
 				
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Features Items</h2>
+						<h2 class="title text-center">{{ $subCategory->sub_category }}</h2>
 						<?php
 							$product = DB::table('products')->where('status', 1)->orderBy('id', 'DESC')->take(6)->get(); 
 						?>
 						<div class="row">
-							{{ csrf_field() }}
 							<div id="post_data"></div>
 						
 						</div>
@@ -289,33 +74,86 @@ $(document).on('click', '.radioBtn a', function(){
     $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
 })
 </script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 $(document).ready(function(){
- 
- var _token = $('input[name="_token"]').val();
 
- load_data('', _token);
+filter_data('');
 
- function load_data(id="", _token)
- {
-  $.ajax({
-   url:"{{ route('subCategory1.product', $subCategory->id) }}",
-   method:"POST",
-   data:{id:id, _token:_token},
-   success:function(data)
-   {
-    $('#load_more_button').remove();
-    $('#post_data').append(data);
-   }
-  })
- }
+function filter_data(id="")
+{	if(id == ""){
+	$('#post_data').html('<div id="loading" style="" ></div>');
+	}
+	// alert(id);
+	var minimum_price = $('#hidden_minimum_price').val();
+	var maximum_price = $('#hidden_maximum_price').val();
+	var brand = get_filter('brand');
+	var keyword = $('#search').val();
+	// alert(minimum_price);
+	$.ajax({
+		url:"{{ route('filter.parentSubCategoryProduct', $subCategory->id) }}",
+		method:"POST",
+		data:{minimum_price:minimum_price, maximum_price:maximum_price, brand:brand,id:id, keyword:keyword},
+		success:function(data){
+			var json = JSON.parse(data);
+			// alert(json.id);
+			
+			if(json.id)
+			{
+				$('#load_more_button').remove();
+				// alert(json.id);
+				$('#post_data').append(json.output);
+			}
+			else{
+				$('#post_data').html(json.output);
+			}
+			// if(json.id )
+		}
+	});
+}
 
- $(document).on('click', '#load_more_button', function(){
+function get_filter(class_name)
+{
+	var brand = $("#brand").val();
+	return brand;
+}
+
+$('#brand').change(function(){
+	filter_data();
+});
+$('#search').keyup(function(){
+	filter_data();
+});
+$('#price_range').slider({
+	range:true,
+	min:100,
+	max:6500,
+	values:[100, 6500],
+	step:500,
+	stop:function(event, ui)
+	{
+		$('#price_show').html(ui.values[0] + ' - ' + ui.values[1]);
+		$('#hidden_minimum_price').val(ui.values[0]);
+		$('#hidden_maximum_price').val(ui.values[1]);
+		filter_data();
+	}
+});
+$(document).on('click', '#load_more_button', function(){
   var id = $(this).data('id');
   $('#load_more_button').html('<b>Loading...</b>');
-  load_data(id, _token);
+  filter_data(id);
  });
 
 });
+
+
+
 </script>
 @endsection
